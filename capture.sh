@@ -14,16 +14,15 @@ echo "========================================" >> "$RUN_LOG"
 while true; do
   echo "--- Capture start: $(date) ---" >> "$RUN_LOG"
 
-  /usr/bin/python3 "$CAPTURE_SCRIPT" >> "$RUN_LOG" 2>&1
-
-  EXIT_CODE=$?
+  "$BASE/.venv/bin/python" "$CAPTURE_SCRIPT" 2>&1 | tee -a "$RUN_LOG"
+  EXIT_CODE=${PIPESTATUS[0]}
 
   if [ $EXIT_CODE -ne 0 ]; then
-    echo "Capture failed with exit code $EXIT_CODE at $(date)" >> "$RUN_LOG"
+    echo "Capture failed with exit code $EXIT_CODE at $(date)" | tee -a "$RUN_LOG"
   else
-    echo "Capture complete: $(date)" >> "$RUN_LOG"
+    echo "Capture complete: $(date)" | tee -a "$RUN_LOG"
   fi
 
-  echo "Sleeping 15 minutes..." >> "$RUN_LOG"
+  echo "Sleeping 15 minutes..." | tee -a "$RUN_LOG"
   sleep 900
 done

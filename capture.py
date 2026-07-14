@@ -12,6 +12,8 @@ from image_stats import measure_brightness
 
 from scene import current_scene
 
+from zoneinfo import ZoneInfo
+
 BASE = Path("/home/curdog/New_lapse")
 
 CONFIG_FILE = BASE / "config.json"
@@ -31,6 +33,19 @@ def load_configuration(now):
     active = json.loads(ACTIVE_FILE.read_text())
 
     location_key = active["location"]
+
+    if location_key not in raw["locations"]:
+        raise ValueError(f"Unknown location: {location_key}")
+
+    # Build the basic configuration first.
+    # This contains the location information needed by Astral.
+    base_config = {}
+
+    base_config.update(raw["defaults"])
+    base_config.update(raw["locations"][location_key])
+
+    base_config["location_key"] = location_key
+
 
     if active.get("mode", "auto") == "auto":
         scene_key, sky = current_scene(now, base_config)
@@ -93,7 +108,13 @@ def main():
 
     ensure_directories()
 
-    now = datetime.now()
+    raw = json.loads(CONFIG_FILE.read_text())
+    active = json.loads(ACTIVE_FILE.read_text())
+
+    location_key = active["location"]
+    timezone_name = raw["locations"][location_key]["timezone"]
+
+    now = datetime.now(ZoneInfo(timezone_name))
 
     config = load_configuration(now)
 
