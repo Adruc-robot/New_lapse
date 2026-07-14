@@ -160,6 +160,8 @@ def main():
 
         "latitude": config["latitude"],
         "longitude": config["longitude"],
+        
+        "sky": config.get("sky", {}),
 
         "photo": str(photo),
 
