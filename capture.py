@@ -61,6 +61,7 @@ def load_configuration(now):
 
     config["location_key"] = location_key
     config["scene_key"] = scene_key
+    config["sky"] = sky
 
     return config
 
