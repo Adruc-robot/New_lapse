@@ -1,0 +1,16 @@
+photos/
+previews/
+logs/
+
+config.json
+active_config.json
+
+*.pyc
+__pycache__/
+
+*.db
+*.sqlite
+*.sqlite3
+
+.env
+requirements.txt
