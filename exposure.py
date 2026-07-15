@@ -57,14 +57,32 @@ def smoothed_median(current_median):
 def calculate_exposure(config, old_exposure_us, old_gain, brightness):
     target = config["target_median"]
 
-    measured = max(smoothed_median(brightness["median"]), 1)
+    measured = max(brightness["median"], 1)
+
+    clipped_high = brightness["clipped_high"]
+    p95 = brightness.get("p95", 0)
+    p99 = brightness.get("p99", 0)
 
     raw_correction = target / measured
 
-    max_step_up = config.get("max_step_up", 1.35)
-    max_step_down = config.get("max_step_down", 0.65)
+    # Severe overexposure: react quickly.
+    if clipped_high >= 0.50:
+        correction = 0.20
+    elif clipped_high >= 0.20:
+        correction = 0.35
+    elif clipped_high >= 0.05:
+        correction = 0.50
+    elif p95 >= 250 or p99 >= 254:
+        correction = min(raw_correction, 0.60)
+    else:
+        max_step_up = config.get("max_step_up", 1.35)
+        max_step_down = config.get("max_step_down", 0.65)
 
-    correction = clamp(raw_correction, max_step_down, max_step_up)
+        correction = clamp(
+            raw_correction,
+            max_step_down,
+            max_step_up
+        )
 
     new_exposure = old_exposure_us * correction
     new_gain = old_gain
@@ -75,12 +93,22 @@ def calculate_exposure(config, old_exposure_us, old_gain, brightness):
         config["max_exposure_us"]
     )
 
-    if new_exposure >= config["max_exposure_us"] and measured < target:
+    # Reduce gain when highlights are clipping.
+    if clipped_high >= 0.05:
+        new_gain = old_gain * 0.75
+
+    # Increase gain only after shutter reaches its maximum
+    # and the image is still too dark.
+    elif (
+        new_exposure >= config["max_exposure_us"]
+        and measured < target
+    ):
         gain_correction = clamp(raw_correction, 1.0, 1.25)
         new_gain = old_gain * gain_correction
 
-    if measured > target and old_gain > config["min_gain"]:
-        gain_correction = clamp(raw_correction, 0.8, 1.0)
+    # If the scene is too bright, reduce gain as well.
+    elif measured > target and old_gain > config["min_gain"]:
+        gain_correction = clamp(raw_correction, 0.80, 1.0)
         new_gain = old_gain * gain_correction
 
     new_gain = clamp(
