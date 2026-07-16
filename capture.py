@@ -170,12 +170,21 @@ def main():
 
         "brightness": brightness,
 
-        "previous_exposure": previous["exposure_us"],
-        "previous_gain": previous["gain"],
+        "camera": {
+            "previous": {
+                "exposure": previous["exposure_us"],
+                "gain": previous["gain"],
+                "effective_exposure": (
+                    previous["exposure_us"] * previous["gain"]
+                )
+            },
+            "current": {
 
-        "new_exposure": exposure,
-        "new_gain": gain,
-
+                "exposure": exposure,
+                "gain": gain,
+                "effective_exposure": ( exposure * gain)
+            }
+        },
         "scene": config["scene_key"]
 
     }
