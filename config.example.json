@@ -63,7 +63,7 @@
       "min_exposure_us": 500000,
       "max_exposure_us": 3000000,
       "min_gain": 2.0,
-      "max_gain": 8.0,
+      "max_gain": 4.5,
       "starting_exposure_us": 1000000,
       "starting_gain": 3.0
     },
@@ -73,7 +73,7 @@
       "min_exposure_us": 1000000,
       "max_exposure_us": 12000000,
       "min_gain": 2.0,
-      "max_gain": 6.0,
+      "max_gain": 4.5,
       "starting_exposure_us": 5000000,
       "starting_gain": 4.0
     },
@@ -82,10 +82,10 @@
       "target_median": 38,
       "min_exposure_us": 8000000,
       "max_exposure_us": 30000000,
-      "min_gain": 6.0,
-      "max_gain": 8.0,
+      "min_gain": 4.5,
+      "max_gain": 6.0,
       "starting_exposure_us": 15000000,
-      "starting_gain": 10.0
+      "starting_gain": 4.5
     },
 
     "moonlit_night": {
