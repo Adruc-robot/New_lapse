@@ -5,107 +5,70 @@
     "min_valid_date": "2026-07-01",
 
     "preview_width": 640,
-    "preview_height": 480,
+    "preview_height": 480
+  },
+
+  "camera_limits": {
+    "min_exposure_us": 100,
+    "max_exposure_us": 6500000,
+
+    "min_gain": 1.0,
+    "max_gain": 4.5,
+
+    "night_preferred_gain": 4.0,
 
     "max_step_up": 1.35,
-    "max_step_down": 0.65
+    "max_step_down": 0.5
+  },
+
+  "brightness_model": {
+    "sun_altitude_points": [
+      {
+        "altitude": 20,
+        "target_median": 120
+      },
+      {
+        "altitude": 6,
+        "target_median": 105
+      },
+      {
+        "altitude": 0,
+        "target_median": 80
+      },
+      {
+        "altitude": -6,
+        "target_median": 50
+      },
+      {
+        "altitude": -12,
+        "target_median": 28
+      },
+      {
+        "altitude": -18,
+        "target_median": 15
+      },
+      {
+        "altitude": -30,
+        "target_median": 8
+      }
+    ],
+
+    "moon_max_target_boost": 12
   },
 
   "locations": {
+    "home": {
+      "name": "Home",
+      "latitude": 37.23,
+      "longitude": -107.6,
+      "timezone": "America/Denver"
+    },
+
     "sig_creek": {
       "name": "Sig Creek",
       "latitude": 37.63,
       "longitude": -107.86,
       "timezone": "America/Denver"
-    },
-
-    "home": {
-      "name": "Home",
-      "latitude": 37.23,
-      "longitude": -107.60,
-      "timezone": "America/Denver"
     }
-  },
-
-  "scene_profiles": {
-    "day": {
-      "target_median": 125,
-      "min_exposure_us": 100,
-      "max_exposure_us": 10000,
-      "min_gain": 1.0,
-      "max_gain": 1.5,
-      "starting_exposure_us": 2000,
-      "starting_gain": 1.0
-    },
-
-    "golden_hour": {
-      "target_median": 100,
-      "min_exposure_us": 1000,
-      "max_exposure_us": 100000,
-      "min_gain": 1.0,
-      "max_gain": 2.0,
-      "starting_exposure_us": 10000,
-      "starting_gain": 1.0
-    },
-
-    "civil_twilight": {
-      "target_median": 80,
-      "min_exposure_us": 10000,
-      "max_exposure_us": 500000,
-      "min_gain": 1.0,
-      "max_gain": 4.0,
-      "starting_exposure_us": 100000,
-      "starting_gain": 1.5
-    },
-
-    "nautical_twilight": {
-      "target_median": 60,
-      "min_exposure_us": 500000,
-      "max_exposure_us": 3000000,
-      "min_gain": 2.0,
-      "max_gain": 4.5,
-      "starting_exposure_us": 1000000,
-      "starting_gain": 3.0
-    },
-
-    "astro_twilight": {
-      "target_median": 42,
-      "min_exposure_us": 1000000,
-      "max_exposure_us": 8000000,
-      "min_gain": 2.0,
-      "max_gain": 4.5,
-      "starting_exposure_us": 5000000,
-      "starting_gain": 4.0
-    },
-
-    "night": {
-      "target_median": 38,
-      "min_exposure_us": 5000000,
-      "max_exposure_us": 6500000,
-      "min_gain": 4.0,
-      "max_gain": 4.5,
-      "starting_exposure_us": 6000000,
-      "starting_gain": 4.0
-    },
-
-    "moonlit_night": {
-     "target_median": 45,
-      "min_exposure_us": 2000000,
-      "max_exposure_us": 15000000,
-      "min_gain": 2.0,
-      "max_gain": 10.0,
-      "starting_exposure_us": 6000000,
-      "starting_gain": 5.0
-    },
-
-    "bright_moon_night": {
-      "target_median": 55,
-      "min_exposure_us": 500000,
-      "max_exposure_us": 8000000,
-      "min_gain": 1.0,
-      "max_gain": 6.0,
-      "starting_exposure_us": 3000000,
-      "starting_gain": 3.0
-}
   }
 }

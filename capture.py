@@ -23,9 +23,11 @@ PHOTO_DIR = BASE / "photos"
 PREVIEW_DIR = BASE / "previews"
 LOG_DIR = BASE / "logs"
 
-def last_settings_file(config):
-  return LOG_DIR / f"last_settings_{config['scene_key']}.json"
+LAST_SETTINGS_FILE = LOG_DIR / "last_settings.json"
 
+def last_settings_file(config):
+  #return LOG_DIR / f"last_settings_{config['scene_key']}.json"
+  return LOG_DIR / f"last_settings.json"
 
 def load_configuration(now):
 
@@ -43,7 +45,8 @@ def load_configuration(now):
 
     base_config.update(raw["defaults"])
     base_config.update(raw["locations"][location_key])
-
+    
+    base_config["brightness_model"] = raw["brightness_model"]
     base_config["location_key"] = location_key
 
 
@@ -83,11 +86,8 @@ def validate_clock(config):
 
 
 def load_last_settings(config):
-
-    path = last_settings_file(config)
-
-    if path.exists():
-        return json.loads(path.read_text())
+    if LAST_SETTINGS_FILE.exists():
+        return json.loads(LAST_SETTINGS_FILE.read_text())
 
     return {
         "exposure_us": config["starting_exposure_us"],
@@ -95,12 +95,10 @@ def load_last_settings(config):
     }
 
 
-def save_last_settings(config, exposure, gain):
+def save_last_settings(scene_key, exposure, gain):
 
-    path = last_settings_file(config)
-
-    path.write_text(json.dumps({
-        "scene": config["scene_key"],
+    LAST_SETTINGS_FILE.write_text(json.dumps({
+        "scene": scene_key,
         "exposure_us": exposure,
         "gain": gain
     }, indent=2))
@@ -137,7 +135,7 @@ def main():
 
     brightness = measure_brightness(preview)
 
-    exposure, gain = calculate_exposure(
+    exposure, gain, controller = calculate_exposure(
         config,
         previous["exposure_us"],
         previous["gain"],
@@ -185,7 +183,8 @@ def main():
                 "effective_exposure": ( exposure * gain)
             }
         },
-        "scene": config["scene_key"]
+        "scene": config["scene_key"],
+        "controller": controller
 
     }
 
@@ -193,7 +192,7 @@ def main():
 
     logfile.write_text(json.dumps(log, indent=4))
 
-    save_last_settings(config, exposure, gain)
+    save_last_settings(config["scene_key"], exposure, gain)
 
     print(f"{timestamp} captured successfully")
 

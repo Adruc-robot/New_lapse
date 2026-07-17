@@ -5,6 +5,44 @@ BASE = Path("/home/curdog/New_lapse")
 LOG_DIR = BASE / "logs"
 HISTORY_FILE = LOG_DIR / "exposure_history.json"
 
+def interpolate(x, x1, y1, x2, y2):
+    if x1 == x2:
+        return y1
+
+    fraction = (x - x1) / (x2 - x1)
+    return y1 + fraction * (y2 - y1)
+
+
+def target_from_sun_altitude(sun_altitude, points):
+    points = sorted(
+        points,
+        key=lambda point: point["altitude"],
+        reverse=True
+    )
+
+    highest = points[0]
+    lowest = points[-1]
+
+    if sun_altitude >= highest["altitude"]:
+        return float(highest["target_median"])
+
+    if sun_altitude <= lowest["altitude"]:
+        return float(lowest["target_median"])
+
+    for upper, lower in zip(points, points[1:]):
+        upper_altitude = upper["altitude"]
+        lower_altitude = lower["altitude"]
+
+        if lower_altitude <= sun_altitude <= upper_altitude:
+            return interpolate(
+                sun_altitude,
+                upper_altitude,
+                upper["target_median"],
+                lower_altitude,
+                lower["target_median"]
+            )
+
+    return float(lowest["target_median"])
 
 def clamp(value, minimum, maximum):
     return max(minimum, min(maximum, value))
@@ -55,7 +93,16 @@ def smoothed_median(current_median):
 
 
 def calculate_exposure(config, old_exposure_us, old_gain, brightness):
-    target = config["target_median"]
+    sun_altitude = config["sky"]["sun_altitude"]
+
+    points = config["brightness_model"]["sun_altitude_points"]
+
+    target = target_from_sun_altitude(
+        sun_altitude,
+        points
+    )
+
+    target = max(1.0, target)
 
     measured = max(brightness["median"], 1)
 
@@ -122,4 +169,12 @@ def calculate_exposure(config, old_exposure_us, old_gain, brightness):
 
     add_history_entry(new_exposure, new_gain, brightness)
 
-    return new_exposure, new_gain
+    controller = {
+        "sun_altitude": sun_altitude,
+        "target_median": round(target, 2),
+        "measured_median": brightness["median"],
+        "raw_correction": round(raw_correction, 4),
+        "applied_correction": round(correction, 4)
+    }
+
+    return new_exposure, new_gain, controller
