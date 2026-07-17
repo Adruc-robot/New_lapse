@@ -71,7 +71,7 @@
     "astro_twilight": {
       "target_median": 42,
       "min_exposure_us": 1000000,
-      "max_exposure_us": 12000000,
+      "max_exposure_us": 8000000,
       "min_gain": 2.0,
       "max_gain": 4.5,
       "starting_exposure_us": 5000000,
@@ -80,12 +80,12 @@
 
     "night": {
       "target_median": 38,
-      "min_exposure_us": 8000000,
-      "max_exposure_us": 30000000,
-      "min_gain": 4.5,
-      "max_gain": 6.0,
-      "starting_exposure_us": 15000000,
-      "starting_gain": 4.5
+      "min_exposure_us": 5000000,
+      "max_exposure_us": 6500000,
+      "min_gain": 4.0,
+      "max_gain": 4.5,
+      "starting_exposure_us": 6000000,
+      "starting_gain": 4.0
     },
 
     "moonlit_night": {
