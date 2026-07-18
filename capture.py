@@ -45,8 +45,8 @@ def load_configuration(now):
 
     base_config.update(raw["defaults"])
     base_config.update(raw["locations"][location_key])
-    
     base_config["brightness_model"] = raw["brightness_model"]
+    base_config["camera_limits"] = raw["camera_limits"]
     base_config["location_key"] = location_key
 
 
@@ -56,7 +56,7 @@ def load_configuration(now):
         scene_key = active["mode"]
         sky = {}
 
-    config = {}
+    config = dict(base_config)
 
     config.update(raw["defaults"])
     config.update(raw["locations"][location_key])
@@ -65,7 +65,7 @@ def load_configuration(now):
     config["location_key"] = location_key
     config["scene_key"] = scene_key
     config["sky"] = sky
-
+    print(config.keys())
     return config
 
 def ensure_directories():
