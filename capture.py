@@ -50,10 +50,17 @@ def load_configuration(now):
     base_config["location_key"] = location_key
 
 
-    if active.get("mode", "auto") == "auto":
+    # if active.get("mode", "auto") == "auto":
+    #     scene_key, sky = current_scene(now, base_config)
+    # else:
+    #     scene_key = active["mode"]
+    #     sky = {}
+    profile = active.get("profile", active.get("mode", "auto"))
+
+    if profile == "auto":
         scene_key, sky = current_scene(now, base_config)
     else:
-        scene_key = active["mode"]
+        scene_key = profile
         sky = {}
 
     config = dict(base_config)
