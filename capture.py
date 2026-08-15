@@ -57,11 +57,12 @@ def load_configuration(now):
     #     sky = {}
     profile = active.get("profile", active.get("mode", "auto"))
 
+    detected_scene, sky = current_scene(now, base_config)
+
     if profile == "auto":
-        scene_key, sky = current_scene(now, base_config)
+        scene_key = detected_scene
     else:
         scene_key = profile
-        sky = {}
 
     config = dict(base_config)
 
