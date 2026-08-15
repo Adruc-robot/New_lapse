@@ -166,7 +166,8 @@ def main():
             ("exp3", 2.0),
         ]
 
-        max_exposure = config["max_exp"]
+        #max_exposure = config["max_exp"]
+        max_exposure = config["max_exposure_us"]
 
         for label, factor in exposure_factors:
             bracket_exposure = int(exposure * factor)
