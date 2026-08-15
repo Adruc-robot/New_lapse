@@ -163,11 +163,15 @@ def main():
         exposure_factors = [
             ("exp1", 0.5),
             ("exp2", 1.0),
-            ("exp3", 2.0),
+            ("exp3", 4.0),
         ]
 
         #max_exposure = config["max_exp"]
-        max_exposure = config["max_exposure_us"]
+        #max_exposure = config["max_exposure_us"]
+        max_exposure = config["camera_limits"].get(
+            "experimental_max_exposure_us",
+            config["max_exposure_us"]
+        )
 
         for label, factor in exposure_factors:
             bracket_exposure = int(exposure * factor)
@@ -182,8 +186,10 @@ def main():
             )
 
             photos.append({
+                "label": label,
+                "factor": factor,
                 "file": str(photo),
-                "exposure": bracket_exposure,
+                "exposure_us": bracket_exposure,
                 "gain": gain,
                 "effective_exposure": bracket_exposure * gain
             })
@@ -214,6 +220,12 @@ def main():
         "longitude": config["longitude"],
         
         "sky": config.get("sky", {}),
+        "bracketing": {
+            "enabled": config["scene_key"] == "night",
+            "experimental_max_exposure_us": config["camera_limits"].get(
+                "experimental_max_exposure_us"
+            )
+        },
 
         #"photo": str(photo),
         "photos": photos,
