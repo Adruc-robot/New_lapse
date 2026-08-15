@@ -142,14 +142,58 @@ def main():
         brightness
     )
 
-    photo = PHOTO_DIR / f"IMG_{timestamp}.jpg"
+    # photo = PHOTO_DIR / f"IMG_{timestamp}.jpg"
 
-    capture_image(
-        filename=photo,
-        exposure_us=exposure,
-        gain=gain
-    )
+    # capture_image(
+    #     filename=photo,
+    #     exposure_us=exposure,
+    #     gain=gain
+    # )
+    photos = []
 
+    if config["scene_key"] == "night":
+        exposure_factors = [
+            ("exp1", 0.5),
+            ("exp2", 1.0),
+            ("exp3", 2.0),
+        ]
+
+        max_exposure = config["max_exp"]
+
+        for label, factor in exposure_factors:
+            bracket_exposure = int(exposure * factor)
+            bracket_exposure = min(bracket_exposure, max_exposure)
+
+            photo = PHOTO_DIR / f"IMG_{timestamp}_{label}.jpg"
+
+            capture_image(
+                filename=photo,
+                exposure_us=bracket_exposure,
+                gain=gain
+            )
+
+            photos.append({
+                "file": str(photo),
+                "exposure": bracket_exposure,
+                "gain": gain,
+                "effective_exposure": bracket_exposure * gain
+            })
+
+    else:
+        photo = PHOTO_DIR / f"IMG_{timestamp}.jpg"
+
+        capture_image(
+            filename=photo,
+            exposure_us=exposure,
+            gain=gain
+        )
+
+        photos.append({
+            "file": str(photo),
+            "exposure": exposure,
+            "gain": gain,
+            "effective_exposure": exposure * gain
+        })
     log = {
 
         "timestamp": now.isoformat(),
@@ -162,7 +206,8 @@ def main():
         
         "sky": config.get("sky", {}),
 
-        "photo": str(photo),
+        #"photo": str(photo),
+        "photos": photos,
 
         "preview": str(preview),
 
