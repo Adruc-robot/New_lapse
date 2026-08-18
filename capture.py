@@ -35,9 +35,15 @@ def load_configuration(now):
     active = json.loads(ACTIVE_FILE.read_text())
 
     location_key = active["location"]
+    camera_key = raw["cameras"]
 
     if location_key not in raw["locations"]:
         raise ValueError(f"Unknown location: {location_key}")
+
+    if camera_key not in raw["cameras"]:
+        raise ValueError(f"Unknown camera: {camera_key}")
+
+    camera = raw["cameras"][camera_key]
 
     # Build the basic configuration first.
     # This contains the location information needed by Astral.
@@ -73,6 +79,7 @@ def load_configuration(now):
     config["location_key"] = location_key
     config["scene_key"] = scene_key
     config["sky"] = sky
+    config["camera"] = camera
     print(config.keys())
     return config
 
@@ -137,6 +144,7 @@ def main():
         filename=preview,
         exposure_us=previous["exposure_us"],
         gain=previous["gain"],
+        camera_config=config["camera"],
         width=config["preview_width"],
         height=config["preview_height"]
     )
@@ -182,7 +190,8 @@ def main():
             capture_image(
                 filename=photo,
                 exposure_us=bracket_exposure,
-                gain=gain
+                gain=gain,
+                camera_config=config["camera"],
             )
 
             photos.append({
@@ -200,7 +209,8 @@ def main():
         capture_image(
             filename=photo,
             exposure_us=exposure,
-            gain=gain
+            gain=gain,
+            camera_config=config["camera"],
         )
 
         photos.append({

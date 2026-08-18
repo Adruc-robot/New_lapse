@@ -1,4 +1,5 @@
 {
   "location": "home",
-  "profile": "auto"
+  "profile": "auto",
+  "camera": "imx462"
 }

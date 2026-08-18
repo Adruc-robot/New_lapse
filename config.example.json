@@ -133,5 +133,18 @@
       "longitude": -107.86,
       "timezone": "America/Denver"
     }
+  },
+  "cameras": {
+    "pi_camera": {
+      "awb": {
+        "mode": "manual",
+        "gains": [1.5, 1.5]
+      }
+    },
+    "imx462": {
+      "awb": {
+        "mode": "auto"
+      }
+    }
   }
 }
