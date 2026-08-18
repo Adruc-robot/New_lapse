@@ -35,7 +35,7 @@ def load_configuration(now):
     active = json.loads(ACTIVE_FILE.read_text())
 
     location_key = active["location"]
-    camera_key = raw["cameras"]
+    camera_key = active["camera"]
 
     if location_key not in raw["locations"]:
         raise ValueError(f"Unknown location: {location_key}")
