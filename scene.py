@@ -77,11 +77,6 @@ def current_scene(now, config):
         scene = "astro_twilight"
 
     else:
-        if moon_is_very_bright:
-            scene = "bright_moon_night"
-        elif moon_is_bright:
-            scene = "moonlit_night"
-        else:
-            scene = "night"
+        scene = "night"
 
     return scene, sky
