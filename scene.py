@@ -55,11 +55,6 @@ def current_scene(now, config):
     sky = sky_conditions(now, config)
 
     sun_alt = sky["sun_altitude"]
-    moon_alt = sky["moon_altitude"]
-    moon_illum = sky["moon_illumination"]
-
-    moon_is_bright = moon_alt > 5 and moon_illum >= 50
-    moon_is_very_bright = moon_alt > 15 and moon_illum >= 75
 
     if sun_alt >= 6:
         scene = "day"
