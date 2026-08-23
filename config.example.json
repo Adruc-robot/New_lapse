@@ -142,8 +142,65 @@
       }
     },
     "imx462": {
-      "awb": {
-        "mode": "auto"
+      "capture_profiles": {
+        "night": [
+          {
+            "settle_seconds": 0,
+            "delay_between_images": 0,
+            "measure_each_image": true,
+            "awb": {
+              "mode": "auto"
+            },
+            "sequence": {
+              "repeat": 5,
+              "steps": [
+                {
+                  "label": "20s",
+                  "exposure_us": 20000000,
+                  "gain": 4.0
+                },
+                {
+                  "label": "5s",
+                  "exposure_us": 5000000,
+                  "gain": 4.0
+                }
+              ]
+            }
+          }
+        ],
+
+        "golden_hour": [
+          {
+            "conditions": {
+              "sun_altitude": {
+                "min": 4.0,
+                "max": 6.0
+              }
+            },
+            "measure_each_image": true,
+            "awb": {
+              "mode": "auto"
+            }
+          },
+          {
+            "conditions": {
+              "sun_altitude": {
+                "min": 2.0,
+                "max": 4.0
+              }
+            },
+            "measure_each_image": true,
+            "awb": {
+              "mode": "auto"
+            }
+          },
+          {
+            "measure_each_image": false,
+            "awb": {
+              "mode": "auto"
+            }
+          }
+        ]
       }
     }
   }
