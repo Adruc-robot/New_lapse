@@ -8,7 +8,7 @@ from datetime import datetime
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
-from camera_old import capture_image
+from camera import capture_image
 from exposure import calculate_exposure
 from image_stats import measure_brightness
 from scene import current_scene
