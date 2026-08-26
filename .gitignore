@@ -2,7 +2,6 @@ photos/
 previews/
 logs/
 
-config.json
 active_config.json
 
 *.pyc
