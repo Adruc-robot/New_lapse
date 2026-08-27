@@ -155,14 +155,21 @@
               "repeat": 5,
               "steps": [
                 {
-                  "label": "20s",
+                  "label": "20s_auto",
                   "exposure_us": 20000000,
-                  "gain": 4.0
+                  "gain": 4.0,
+                  "awb": {
+                    "mode": "auto"
+                  }
                 },
                 {
-                  "label": "5s",
-                  "exposure_us": 5000000,
-                  "gain": 4.0
+                  "label": "20s_manual",
+                  "exposure_us": 20000000,
+                  "gain": 4.0,
+                  "awb": {
+                    "mode": "manual",
+                    "gains": [1.5, 1.5]
+                  }
                 }
               ]
             }
