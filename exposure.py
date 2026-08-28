@@ -113,12 +113,20 @@ def calculate_exposure(config, old_exposure_us, old_gain, brightness):
     raw_correction = target / measured
 
     # Severe overexposure: react quickly.
+    # if clipped_high >= 0.50:
+    #     correction = 0.20
+    # elif clipped_high >= 0.20:
+    #     correction = 0.35
+    # elif clipped_high >= 0.05:
+    #     correction = 0.50
+    # elif p95 >= 250 or p99 >= 254:
+    #     correction = min(raw_correction, 0.60)
     if clipped_high >= 0.50:
-        correction = 0.20
+        correction = 0.05
     elif clipped_high >= 0.20:
-        correction = 0.35
+        correction = 0.20
     elif clipped_high >= 0.05:
-        correction = 0.50
+        correction = 0.40
     elif p95 >= 250 or p99 >= 254:
         correction = min(raw_correction, 0.60)
     else:
@@ -141,7 +149,11 @@ def calculate_exposure(config, old_exposure_us, old_gain, brightness):
     )
 
     # Reduce gain when highlights are clipping.
-    if clipped_high >= 0.05:
+    # if clipped_high >= 0.05:
+    #     new_gain = old_gain * 0.75
+    if clipped_high >= 0.20:
+        new_gain = config["min_gain"]
+    elif clipped_high >= 0.05:
         new_gain = old_gain * 0.75
 
     # Increase gain only after shutter reaches its maximum
