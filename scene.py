@@ -2,7 +2,7 @@ from astral import LocationInfo
 from astral.sun import elevation as sun_elevation
 from astral.moon import elevation as moon_elevation
 from astral.moon import phase as moon_phase
-
+from datetime import timezone
 
 def moon_illumination_percent(now):
     """
@@ -41,7 +41,9 @@ def sky_conditions(now, config):
     observer = get_observer(config)
 
     sun_alt = sun_elevation(observer, now)
-    moon_alt = moon_elevation(observer, now)
+    # moon_alt = moon_elevation(observer, now)
+    now_utc = now.astimezone(timezone.utc)
+    moon_alt = moon_elevation(observer, now_utc)
     moon_illum = moon_illumination_percent(now)
 
     return {
