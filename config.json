@@ -155,39 +155,48 @@
               "repeat": 1,
               "steps": [
                 {
-                  "label": "20s_r25_b12",
+                  "label": "20s_r10_b12",
                   "exposure_us": 20000000,
                   "gain": 4.0,
                   "awb": {
                     "mode": "manual",
-                    "gains": [2.5, 1.2]
+                    "gains": [1.0, 1.2]
                   }
                 },
                 {
-                  "label": "20s_r25_b147",
+                  "label": "20s_r125_b12",
                   "exposure_us": 20000000,
                   "gain": 4.0,
                   "awb": {
                     "mode": "manual",
-                    "gains": [2.5, 1.47]
+                    "gains": [1.25, 1.2]
                   }
                 },
                 {
-                  "label": "20s_r25_b177",
+                  "label": "20s_r15_b12",
                   "exposure_us": 20000000,
                   "gain": 4.0,
                   "awb": {
                     "mode": "manual",
-                    "gains": [2.5, 1.77]
+                    "gains": [1.5, 1.2]
                   }
                 },
                 {
-                  "label": "20s_r25_b20",
+                  "label": "20s_r175_b12",
                   "exposure_us": 20000000,
                   "gain": 4.0,
                   "awb": {
                     "mode": "manual",
-                    "gains": [2.5, 2.0]
+                    "gains": [1.75, 1.2]
+                  }
+                },
+                {
+                  "label": "20s_r20_b12",
+                  "exposure_us": 20000000,
+                  "gain": 4.0,
+                  "awb": {
+                    "mode": "manual",
+                    "gains": [2.0, 1.2]
                   }
                 }
               ]
