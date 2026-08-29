@@ -156,7 +156,7 @@
               "steps": [
                 {
                   "label": "20s_r10_b12",
-                  "exposure_us": 20000000,
+                  "exposure_us": 5000000,
                   "gain": 4.0,
                   "awb": {
                     "mode": "manual",
@@ -165,7 +165,7 @@
                 },
                 {
                   "label": "20s_r105_b12",
-                  "exposure_us": 20000000,
+                  "exposure_us": 5000000,
                   "gain": 4.0,
                   "awb": {
                     "mode": "manual",
@@ -174,7 +174,7 @@
                 },
                 {
                   "label": "20s_r110_b12",
-                  "exposure_us": 20000000,
+                  "exposure_us": 5000000,
                   "gain": 4.0,
                   "awb": {
                     "mode": "manual",
@@ -183,7 +183,7 @@
                 },
                 {
                   "label": "20s_r115_b12",
-                  "exposure_us": 20000000,
+                  "exposure_us": 5000000,
                   "gain": 4.0,
                   "awb": {
                     "mode": "manual",
@@ -192,7 +192,7 @@
                 },
                 {
                   "label": "20s_r12_b12",
-                  "exposure_us": 20000000,
+                  "exposure_us": 5000000,
                   "gain": 4.0,
                   "awb": {
                     "mode": "manual",
@@ -201,7 +201,7 @@
                 },
                 {
                   "label": "20s_r125_b12",
-                  "exposure_us": 20000000,
+                  "exposure_us": 5000000,
                   "gain": 4.0,
                   "awb": {
                     "mode": "manual",
