@@ -164,39 +164,48 @@
                   }
                 },
                 {
+                  "label": "20s_r105_b12",
+                  "exposure_us": 20000000,
+                  "gain": 4.0,
+                  "awb": {
+                    "mode": "manual",
+                    "gains": [1.05, 1.2]
+                  }
+                },
+                {
+                  "label": "20s_r110_b12",
+                  "exposure_us": 20000000,
+                  "gain": 4.0,
+                  "awb": {
+                    "mode": "manual",
+                    "gains": [1.10, 1.2]
+                  }
+                },
+                {
+                  "label": "20s_r115_b12",
+                  "exposure_us": 20000000,
+                  "gain": 4.0,
+                  "awb": {
+                    "mode": "manual",
+                    "gains": [1.15, 1.2]
+                  }
+                },
+                {
+                  "label": "20s_r12_b12",
+                  "exposure_us": 20000000,
+                  "gain": 4.0,
+                  "awb": {
+                    "mode": "manual",
+                    "gains": [1.2, 1.2]
+                  }
+                },
+                {
                   "label": "20s_r125_b12",
                   "exposure_us": 20000000,
                   "gain": 4.0,
                   "awb": {
                     "mode": "manual",
                     "gains": [1.25, 1.2]
-                  }
-                },
-                {
-                  "label": "20s_r15_b12",
-                  "exposure_us": 20000000,
-                  "gain": 4.0,
-                  "awb": {
-                    "mode": "manual",
-                    "gains": [1.5, 1.2]
-                  }
-                },
-                {
-                  "label": "20s_r175_b12",
-                  "exposure_us": 20000000,
-                  "gain": 4.0,
-                  "awb": {
-                    "mode": "manual",
-                    "gains": [1.75, 1.2]
-                  }
-                },
-                {
-                  "label": "20s_r20_b12",
-                  "exposure_us": 20000000,
-                  "gain": 4.0,
-                  "awb": {
-                    "mode": "manual",
-                    "gains": [2.0, 1.2]
                   }
                 }
               ]
