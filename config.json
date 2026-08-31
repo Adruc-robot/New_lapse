@@ -145,92 +145,15 @@
       "capture_profiles": {
         "night": [
           {
-            "settle_seconds": 5,
-            "delay_between_images": 0,
-            "measure_each_image": true,
             "awb": {
-              "mode": "auto"
-            },
-            "sequence": {
-              "repeat": 1,
-              "steps": [
-                {
-                  "label": "20s_r109_b13",
-                  "exposure_us": 20000000,
-                  "gain": 4.0,
-                  "awb": {
-                    "mode": "manual",
-                    "gains": [1.09, 1.3]
-                  }
-                },
-                {
-                  "label": "20s_r11_b13",
-                  "exposure_us": 20000000,
-                  "gain": 4.0,
-                  "awb": {
-                    "mode": "manual",
-                    "gains": [1.1, 1.3]
-                  }
-                },
-                {
-                  "label": "20s_r111_b13",
-                  "exposure_us": 20000000,
-                  "gain": 4.0,
-                  "awb": {
-                    "mode": "manual",
-                    "gains": [1.11, 1.3]
-                  }
-                },
-                {
-                  "label": "20s_r112_b13",
-                  "exposure_us": 20000000,
-                  "gain": 4.0,
-                  "awb": {
-                    "mode": "manual",
-                    "gains": [1.12, 1.3]
-                  }
-                },
-                {
-                  "label": "20s_r113_b13",
-                  "exposure_us": 20000000,
-                  "gain": 4.0,
-                  "awb": {
-                    "mode": "manual",
-                    "gains": [1.13, 1.3]
-                  }
-                }
-              ]
+              "mode": "manual",
+              "gains": [1.1,1.3]
             }
           }
         ],
 
         "golden_hour": [
           {
-            "conditions": {
-              "sun_altitude": {
-                "min": 4.0,
-                "max": 6.0
-              }
-            },
-            "measure_each_image": true,
-            "awb": {
-              "mode": "auto"
-            }
-          },
-          {
-            "conditions": {
-              "sun_altitude": {
-                "min": 2.0,
-                "max": 4.0
-              }
-            },
-            "measure_each_image": true,
-            "awb": {
-              "mode": "auto"
-            }
-          },
-          {
-            "measure_each_image": false,
             "awb": {
               "mode": "auto"
             }
@@ -242,20 +165,24 @@
               "repeat": 1,
               "steps": [
                 {
-                  "label": "r120_b10",
-                  "awb": {"mode": "manual", "gains": [1.20, 1.0]}
+                  "label": "r1_b10",
+                  "awb": {"mode": "manual", "gains": [1.0, 1.0]}
                 },
                 {
-                  "label": "r125_b10",
-                  "awb": {"mode": "manual", "gains": [1.25, 1.0]}
+                  "label": "r105_b10",
+                  "awb": {"mode": "manual", "gains": [1.05, 1.0]}
                 },
                 {
-                  "label": "r130_b10",
-                  "awb": {"mode": "manual", "gains": [1.30, 1.0]}
+                  "label": "r11_b10",
+                  "awb": {"mode": "manual", "gains": [1.10, 1.0]}
                 },
                 {
-                  "label": "r135_b10",
-                  "awb": {"mode": "manual", "gains": [1.35, 1.0]}
+                  "label": "r115_b10",
+                  "awb": {"mode": "manual", "gains": [1.15, 1.0]}
+                },
+                {
+                  "label": "r12_b10",
+                  "awb": {"mode": "manual", "gains": [1.2, 1.0]}
                 }
               ]
             }
