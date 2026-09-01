@@ -154,6 +154,7 @@
 
         "golden_hour": [
           {
+            "settle_seconds": 5,
             "awb": {
               "mode": "auto"
             }
