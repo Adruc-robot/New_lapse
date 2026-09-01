@@ -187,6 +187,22 @@
               ]
             }
           }
+        ],
+        "civil_twilight": [
+          {
+            "settle_seconds": 5,
+            "awb": {
+              "mode": "auto"
+            }
+          }
+        ],
+        "day": [
+          {
+            "settle_seconds": 5,
+            "awb": {
+              "mode": "auto"
+            }
+          }
         ]
       }
     }
