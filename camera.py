@@ -1,3 +1,4 @@
+import json
 import subprocess
 
 
@@ -10,12 +11,15 @@ def capture_image(
     height=None,
     settle_seconds=0,
 ):
+    metadata_file = filename.with_suffix(".metadata.tmp.json")
     cmd = [
         "rpicam-still",
         "--output", str(filename),
         "--shutter", str(int(exposure_us)),
         "--gain", str(float(gain)),
         "--nopreview",
+        "--metadata", str(metadata_file),
+        "--metadata-format", "json",
     ]
 
     # With --immediate, rpicam-still captures as soon as possible and the
@@ -33,6 +37,10 @@ def capture_image(
 
     subprocess.run(cmd, check=True)
 
+    metadata = json.loads(metadata_file.read_text())
+    metadata_file.unlink()
+
+    return metadata
 
 def add_white_balance_args(cmd, camera_config):
     awb = camera_config.get("awb", {})

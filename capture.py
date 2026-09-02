@@ -292,7 +292,8 @@ def capture_and_record(
     step_index=None,
     measure=False,
 ):
-    capture_image(
+    
+    camera_metadata = capture_image(
         filename=filename,
         exposure_us=exposure_us,
         gain=gain,
@@ -306,6 +307,7 @@ def capture_and_record(
         "gain": gain,
         "effective_exposure": exposure_us * gain,
     }
+    record["camera_metadata"] = camera_metadata
 
     if label is not None:
         record["label"] = label
@@ -424,7 +426,7 @@ def main():
         config["camera"], profile=capture_profile
     )
 
-    capture_image(
+    preview_metadata = capture_image(
         filename=preview,
         exposure_us=previous["exposure_us"],
         gain=previous["gain"],
@@ -433,7 +435,6 @@ def main():
         height=config["preview_height"],
         settle_seconds=capture_profile.get("settle_seconds", 0),
     )
-
     brightness = measure_brightness(preview)
 
     exposure, gain, controller = calculate_exposure(
@@ -462,6 +463,7 @@ def main():
         "capture_profile": capture_profile,
         "photos": photos,
         "preview": str(preview),
+        "preview_metadata": preview_metadata,
         "brightness": brightness,
         "camera": {
             "previous": {
@@ -475,7 +477,7 @@ def main():
                 "exposure": exposure,
                 "gain": gain,
                 "effective_exposure": exposure * gain,
-            },
+            }
         },
         "controller": controller,
     }
