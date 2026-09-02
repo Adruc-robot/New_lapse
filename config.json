@@ -170,20 +170,20 @@
                   "awb": {"mode": "manual", "gains": [1.2, 1.0]}
                 },
                 {
-                  "label": "r125_b10",
-                  "awb": {"mode": "manual", "gains": [1.25, 1.0]}
+                  "label": "r12_b11",
+                  "awb": {"mode": "manual", "gains": [1.2, 1.1]}
                 },
                 {
-                  "label": "r13_b10",
-                  "awb": {"mode": "manual", "gains": [1.3, 1.0]}
+                  "label": "r12_b12",
+                  "awb": {"mode": "manual", "gains": [1.2, 1.2]}
                 },
                 {
-                  "label": "r135_b10",
-                  "awb": {"mode": "manual", "gains": [1.35, 1.0]}
+                  "label": "r12_b13",
+                  "awb": {"mode": "manual", "gains": [1.2, 1.3]}
                 },
                 {
-                  "label": "r14_b10",
-                  "awb": {"mode": "manual", "gains": [1.4, 1.0]}
+                  "label": "r12_b14",
+                  "awb": {"mode": "manual", "gains": [1.2, 1.4]}
                 }
               ]
             }
