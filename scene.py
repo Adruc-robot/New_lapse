@@ -2,7 +2,7 @@ from astral import LocationInfo
 from astral.sun import elevation as sun_elevation
 from astral.moon import elevation as moon_elevation
 from astral.moon import phase as moon_phase
-from datetime import timezone
+from datetime import timezone, timedelta
 
 def moon_illumination_percent(now):
     """
@@ -41,21 +41,25 @@ def sky_conditions(now, config):
     observer = get_observer(config)
 
     sun_alt = sun_elevation(observer, now)
-    # moon_alt = moon_elevation(observer, now)
     now_utc = now.astimezone(timezone.utc)
     moon_alt = moon_elevation(observer, now_utc)
     moon_illum = moon_illumination_percent(now)
 
+    sun_alt_now = sun_elevation(observer, now)
+    sun_alt_later = sun_elevation(observer, now + timedelta(minutes=1))
+    
+    sun_is_rising = sun_alt_later > sun_alt_now
+
     return {
         "sun_altitude": round(sun_alt, 2),
         "moon_altitude": round(moon_alt, 2),
-        "moon_illumination": moon_illum
+        "moon_illumination": moon_illum,
+        "sun_is_rising": sun_is_rising
     }
 
 
 def current_scene(now, config):
     sky = sky_conditions(now, config)
-
     sun_alt = sky["sun_altitude"]
 
     if sun_alt >= 6:
@@ -68,7 +72,10 @@ def current_scene(now, config):
         scene = "civil_twilight"
 
     elif -12 <= sun_alt < -6:
-        scene = "nautical_twilight"
+            if sky["sun_is_rising"]:
+                scene = "nautical_twilight_morning"
+            else:
+                scene = "nautical_twiligh_evening"
 
     elif -18 <= sun_alt < -12:
         scene = "astro_twilight"
