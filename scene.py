@@ -75,7 +75,7 @@ def current_scene(now, config):
             if sky["sun_is_rising"]:
                 scene = "nautical_twilight_morning"
             else:
-                scene = "nautical_twiligh_evening"
+                scene = "nautical_twilight_evening"
 
     elif -18 <= sun_alt < -12:
         scene = "astro_twilight"
